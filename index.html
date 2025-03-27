@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOS API Documentation</title>
+</head>
+<body>
+    <h1>KOS API Documentation</h1>
+    
+    <p>Documentation for PyKOS, KOS-Sim, and KOS-SDK.</p>
+    
+    <h2>PyKOS</h2>
+    
+    {% for file in site.static_files %}
+      {% if file.path contains '/pykos/' and file.extname == '.html' %}
+    <ul>
+        <li><a href="{{ file.path | relative_url }}">{{ file.name | remove: '.html' | capitalize | replace: '_', ' ' }}</a> - {{ file.name | remove: '.html' }} service client</li>
+    </ul>
+      {% endif %}
+    {% endfor %}
+    
+    <h2>KOS-Sim</h2>
+    
+    {% for file in site.static_files %}
+      {% if file.path contains '/kos_sim/' and file.extname == '.html' %}
+    <ul>
+        <li><a href="{{ file.path | relative_url }}">{{ file.name | remove: '.html' | capitalize | replace: '_', ' ' }}</a> - {{ file.name | remove: '.html' | capitalize }} documentation</li>
+    </ul>
+      {% endif %}
+    {% endfor %}
+    
+    <h2>KOS-SDK</h2>
+    
+    {% for file in site.static_files %}
+      {% if file.path contains '/kos-sdk/' and file.extname == '.html' %}
+    <ul>
+        <li><a href="{{ file.path | relative_url }}">{{ file.name | remove: '.html' | capitalize | replace: '_', ' ' }}</a> - {{ file.name | remove: '.html' | capitalize }} documentation</li>
+    </ul>
+      {% endif %}
+    {% endfor %}
+</body>
+</html>
