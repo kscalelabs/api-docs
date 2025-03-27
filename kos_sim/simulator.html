@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>kos_sim.simulator API documentation</title>
+<meta name="description" content="Wrapper around MuJoCo simulation.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>kos_sim.simulator</code></h1>
+</header>
+<section id="section-intro">
+<p>Wrapper around MuJoCo simulation.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest"><code class="flex name class">
+<span>class <span class="ident">ConfigureActuatorRequest</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConfigureActuatorRequest(TypedDict):
+    torque_enabled: NotRequired[bool]
+    zero_position: NotRequired[float]
+    kp: NotRequired[float]
+    kd: NotRequired[float]
+    max_torque: NotRequired[float]</code></pre>
+</details>
+<div class="desc"><p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's
+(key, value) pairs
+dict(iterable) -&gt; new dictionary initialized as if via:
+d = {}
+for k, v in iterable:
+d[k] = v
+dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
+in the keyword argument list.
+For example:
+dict(one=1, two=2)</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.dict</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest.kd"><code class="name">var <span class="ident">kd</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest.kp"><code class="name">var <span class="ident">kp</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest.max_torque"><code class="name">var <span class="ident">max_torque</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest.torque_enabled"><code class="name">var <span class="ident">torque_enabled</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.simulator.ConfigureActuatorRequest.zero_position"><code class="name">var <span class="ident">zero_position</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator"><code class="flex name class">
+<span>class <span class="ident">MujocoSimulator</span></span>
+<span>(</span><span>model_path: str | pathlib.Path,<br>model_metadata: kscale.web.gen.api.RobotURDFMetadataOutput,<br>dt: float = 0.001,<br>gravity: bool = True,<br>render: bool = True,<br>suspended: bool = False,<br>command_delay_min: float = 0.0,<br>command_delay_max: float = 0.0,<br>scene_type: str = 'smooth')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MujocoSimulator:
+    def __init__(
+        self,
+        model_path: str | Path,
+        model_metadata: RobotURDFMetadataOutput,
+        dt: float = 0.001,
+        gravity: bool = True,
+        render: bool = True,
+        suspended: bool = False,
+        command_delay_min: float = 0.0,
+        command_delay_max: float = 0.0,
+        scene_type: str = &#34;smooth&#34;,
+    ) -&gt; None:
+        # Store parameters
+        self._model_path = model_path
+        self._metadata = model_metadata
+        self._dt = dt
+        self._gravity = gravity
+        self._render_enabled = render
+        self._suspended = suspended
+        self._command_delay_min = command_delay_min
+        self._command_delay_max = command_delay_max
+        self._viewer = None
+        self._sim_time = 0.0
+        self._current_commands = {}
+        self._lock = asyncio.Lock()
+
+        try:
+            # Initialize GLFW first if rendering is enabled
+            if self._render_enabled:
+                import glfw
+
+                if not glfw.init():
+                    logger.error(&#34;Failed to initialize GLFW&#34;)
+                    self._render_enabled = False
+                else:
+                    logger.info(&#34;GLFW initialized successfully&#34;)
+
+            # Load model and create data
+            self._model = self.load_mjmodel(str(model_path), scene_type)
+            self._data = mujoco.MjData(self._model)
+            logger.info(&#34;Model loaded with scene template&#34;)
+
+            # Create viewer after model and data exist
+            if self._render_enabled:
+                try:
+                    self._viewer = mujoco_viewer.MujocoViewer(self._model, self._data, mode=&#34;window&#34;)
+                    logger.info(&#34;Viewer created successfully&#34;)
+                except Exception as e:
+                    logger.error(&#34;Failed to create viewer: %s&#34;, e)
+                    self._render_enabled = False
+                    if &#34;glfw&#34; in globals():
+                        glfw.terminate()
+
+            # Gets the joint name mapping BEFORE loading model
+            if self._metadata.joint_name_to_metadata is None:
+                raise ValueError(&#34;Joint name to metadata is not set&#34;)
+            self._joint_name_to_id = {
+                name: _nn(joint.id) for name, joint in self._metadata.joint_name_to_metadata.items()
+            }
+            self._joint_id_to_name = {v: k for k, v in self._joint_name_to_id.items()}
+            if len(self._joint_name_to_id) != len(self._joint_id_to_name):
+                raise ValueError(&#34;Joint IDs are not unique!&#34;)
+
+            # Cache lookups after initialization
+            self._sensor_name_to_id = {self._model.sensor(i).name: i for i in range(self._model.nsensor)}
+            self._actuator_name_to_id = {self._model.actuator(i).name: i for i in range(self._model.nu)}
+            self._joint_id_to_actuator_id = {
+                joint_id: self._actuator_name_to_id[f&#34;{name}_ctrl&#34;] for joint_id, name in self._joint_id_to_name.items()
+            }
+
+            # Enable torque for all actuators by default
+            # for actuator_id in self._joint_id_to_actuator_id.values():
+                # self._model.actuator_biasprm[actuator_id, 1] = 0  # bias
+                # self._model.actuator_biasprm[actuator_id, 2] = 12  # kd
+                # self._model.actuator_gainprm[actuator_id, 0] = 250  # kp
+                # # Actually enable the torque by default
+                # self._model.actuator_gaintype[actuator_id] = 0  # position control
+                # self._model.actuator_biastype[actuator_id] = 1  # enable kd
+
+            # Set simulation parameters
+            self._model.opt.timestep = self._dt
+            if not self._gravity:
+                self._model.opt.gravity[2] = 0.0
+                logger.info(&#34;Gravity disabled&#34;)
+            else:
+                logger.info(&#34;Gravity enabled: %s&#34;, self._model.opt.gravity)
+
+            logger.info(
+                &#34;Model loaded successfully. Num joints: %d, Num actuators: %d&#34;, self._model.njnt, self._model.nu
+            )
+        except Exception as e:
+            logger.error(&#34;Failed to load model: %s&#34;, e)
+            raise
+
+    async def step(self) -&gt; None:
+        &#34;&#34;&#34;Execute one step of the simulation.&#34;&#34;&#34;
+        async with self._lock:
+            self._sim_time += self._dt
+
+            # Process commands that are ready to be applied
+            commands_to_remove = []
+            for name, (target_pos, application_time) in self._current_commands.items():
+                if self._sim_time &gt;= application_time:
+                    actuator_id = self._actuator_name_to_id[name]
+                    logger.debug(&#34;Setting actuator %s (id %d) to %f&#34;, name, actuator_id, target_pos)
+                    self._data.ctrl[actuator_id] = target_pos
+                    commands_to_remove.append(name)
+
+            # Remove processed commands
+            if commands_to_remove:
+                logger.debug(&#34;Removing %d commands at sim time %f&#34;, len(commands_to_remove), self._sim_time)
+                for name in commands_to_remove:
+                    self._current_commands.pop(name)
+
+        # Step physics - allow other coroutines to run during computation
+        mujoco.mj_step(self._model, self._data)
+        if self._suspended:
+            # Find the root joint (floating_base)
+            for i in range(self._model.njnt):
+                if self._model.jnt_type[i] == mujoco.mjtJoint.mjJNT_FREE:
+                    self._data.qpos[i : i + 7] = self._model.keyframe(&#34;default&#34;).qpos[i : i + 7]
+                    self._data.qvel[i : i + 6] = 0
+                    break
+
+        return self._data
+
+    async def render(self) -&gt; None:
+        &#34;&#34;&#34;Render the simulation asynchronously.&#34;&#34;&#34;
+        if not self._render_enabled or self._viewer is None:
+            return
+
+        try:
+            if not self._viewer.is_alive:
+                logger.error(&#34;Viewer is not alive&#34;)
+                self._render_enabled = False
+                self._viewer = None
+                return
+            self._viewer.render()
+        except Exception as e:
+            logger.error(&#34;Render failed: %s&#34;, e)
+            self._render_enabled = False
+            if self._viewer is not None:
+                try:
+                    self._viewer.close()
+                    import glfw
+
+                    glfw.terminate()
+                except:
+                    pass
+                self._viewer = None
+
+    async def get_sensor_data(self, name: str) -&gt; np.ndarray:
+        &#34;&#34;&#34;Get data from a named sensor.&#34;&#34;&#34;
+        async with self._lock:
+            if name not in self._sensor_name_to_id:
+                raise KeyError(f&#34;Sensor &#39;{name}&#39; not found&#34;)
+            sensor_id = self._sensor_name_to_id[name]
+            return self._data.sensor(sensor_id).data.copy()
+
+    async def get_actuator_state(self, joint_id: int) -&gt; float:
+        &#34;&#34;&#34;Get current state of an actuator using real joint ID.&#34;&#34;&#34;
+        logger.debug(&#34;Getting actuator state for joint ID: %s&#34;, joint_id)
+        async with self._lock:
+            if joint_id not in self._joint_id_to_name:
+                raise KeyError(f&#34;Joint ID {joint_id} not found in config mappings&#34;)
+
+            joint_name = self._joint_id_to_name[joint_id]
+
+        return float(self._data.joint(joint_name).qpos)
+
+    async def get_actuator_velocity(self, joint_id: int) -&gt; float:
+        &#34;&#34;&#34;Get current velocity of an actuator using real joint ID.&#34;&#34;&#34;
+        logger.debug(&#34;Getting actuator velocity for joint ID: %s&#34;, joint_id)
+        async with self._lock:
+            if joint_id not in self._joint_id_to_name:
+                raise KeyError(f&#34;Joint ID {joint_id} not found in config mappings&#34;)
+
+            joint_name = self._joint_id_to_name[joint_id]
+
+        return float(self._data.joint(joint_name).qvel)
+
+    async def command_actuators(self, commands: dict[int, float]) -&gt; None:
+        &#34;&#34;&#34;Command multiple actuators at once using real joint IDs.&#34;&#34;&#34;
+        async with self._lock:
+            for joint_id, command in commands.items():
+                # Translate real joint ID to MuJoCo joint name
+                if joint_id not in self._joint_id_to_name:
+                    logger.warning(&#34;Joint ID %d not found in config mappings&#34;, joint_id)
+                    continue
+
+                joint_name = self._joint_id_to_name[joint_id]
+                actuator_name = f&#34;{joint_name}_ctrl&#34;
+                if actuator_name not in self._actuator_name_to_id:
+                    logger.warning(&#34;Joint %s not found in MuJoCo model&#34;, actuator_name)
+                    continue
+
+                # Calculate random delay and application time
+                delay = np.random.uniform(self._command_delay_min, self._command_delay_max)
+                application_time = self._sim_time + delay
+
+                logger.debug(&#34;Setting actuator %s to %f with delay %f s&#34;, actuator_name, command, delay)
+                self._current_commands[actuator_name] = (command, application_time)
+
+    async def configure_actuator(self, joint_id: int, configuration: ConfigureActuatorRequest) -&gt; None:
+        &#34;&#34;&#34;Configure an actuator.&#34;&#34;&#34;
+        async with self._lock:
+            if joint_id not in self._joint_id_to_actuator_id:
+                raise ValueError(
+                    f&#34;Joint ID {joint_id} not found in config mappings. &#34;
+                    f&#34;The available joint IDs are {self._joint_id_to_actuator_id.keys()}&#34;
+                )
+            actuator_id = self._joint_id_to_actuator_id[joint_id]
+
+            if &#34;torque_enabled&#34; in configuration:
+                if configuration[&#34;torque_enabled&#34;]:
+                    self._model.actuator_gaintype[actuator_id] = 0  # position control
+                    self._model.actuator_biastype[actuator_id] = 1  # enable kd
+                else:
+                    self._model.actuator_gaintype[actuator_id] = -1  # disable control
+                    self._model.actuator_biastype[actuator_id] = -1  # disable damping
+                logger.debug(&#34;Set torque_enabled for actuator %s to %s&#34;, joint_id, configuration[&#34;torque_enabled&#34;])
+
+            if &#34;kp&#34; in configuration:
+                prev_kp = float(self._model.actuator_gainprm[actuator_id, 0])
+                self._model.actuator_gainprm[actuator_id, 0] = configuration[&#34;kp&#34;]
+                logger.debug(&#34;Set kp for actuator %s from %f to %f&#34;, joint_id, prev_kp, configuration[&#34;kp&#34;])
+
+            if &#34;kd&#34; in configuration:
+                prev_kd = -float(self._model.actuator_biasprm[actuator_id, 2])
+                self._model.actuator_biasprm[actuator_id, 2] = -configuration[&#34;kd&#34;]
+                logger.debug(&#34;Set kd for actuator %s from %f to %f&#34;, joint_id, prev_kd, configuration[&#34;kd&#34;])
+
+            if &#34;max_torque&#34; in configuration:
+                prev_min_torque = float(self._model.actuator_forcerange[actuator_id, 0])
+                prev_max_torque = float(self._model.actuator_forcerange[actuator_id, 1])
+                self._model.actuator_forcerange[actuator_id, 0] = -configuration[&#34;max_torque&#34;]
+                self._model.actuator_forcerange[actuator_id, 1] = configuration[&#34;max_torque&#34;]
+                logger.debug(
+                    &#34;Set max_torque for actuator %s from (%f, %f) to +/- %f&#34;,
+                    joint_id,
+                    prev_min_torque,
+                    prev_max_torque,
+                    configuration[&#34;max_torque&#34;],
+                )
+
+    async def reset(self, qpos: list[float] | None = None) -&gt; None:
+        &#34;&#34;&#34;Reset simulation to specified or default state.&#34;&#34;&#34;
+        self._sim_time = 0.0
+        self._current_commands.clear()
+
+        mujoco.mj_resetData(self._model, self._data)
+
+        # If no qpos provided, set a default height
+        if qpos is None:
+            # Find the free joint that controls base position
+            for i in range(self._model.njnt):
+                if self._model.jnt_type[i] == mujoco.mjtJoint.mjJNT_FREE:
+                    # Set initial height to 0.5 meters above ground
+                    self._data.qpos[i + 2] = 0.5  # z-coordinate
+                    break
+        else:
+            self._data.qpos[: len(qpos)] = qpos
+
+        self._data.qvel[:] = np.zeros_like(self._data.qvel)
+        self._data.qacc[:] = np.zeros_like(self._data.qacc)
+        mujoco.mj_forward(self._model, self._data)
+
+    async def close(self) -&gt; None:
+        &#34;&#34;&#34;Clean up simulation resources.&#34;&#34;&#34;
+        if self._viewer is not None:
+            try:
+                self._viewer.close()
+            except Exception as e:
+                logger.error(&#34;Error closing viewer: %s&#34;, e)
+            self._viewer = None
+
+    @property
+    def timestep(self) -&gt; float:
+        return self._model.opt.timestep
+
+    def load_mjmodel(self, model_path: str, scene_type: str) -&gt; mujoco.MjModel:
+        &#34;&#34;&#34;Load a MuJoCo model with a scene template.&#34;&#34;&#34;
+        # Get scene XML
+        scene_xml = get_scene_model(scene_type)
+
+        # Parse the robot model
+        robot_tree = ET.parse(model_path)
+        robot_root = robot_tree.getroot()
+
+        # Parse the scene template
+        scene_root = ET.fromstring(scene_xml)
+
+        # Copy scene elements into robot model
+        for section in scene_root:
+            if section.tag in [&#34;asset&#34;, &#34;worldbody&#34;]:
+                target = robot_root.find(section.tag)
+                if target is None:
+                    robot_root.append(section)
+                else:
+                    for element in section:
+                        target.append(element)
+
+        # Write combined XML to temporary file in the same directory as the model
+        model_dir = Path(model_path).parent
+        with tempfile.NamedTemporaryFile(suffix=&#34;.xml&#34;, mode=&#34;w&#34;, dir=str(model_dir), delete=False) as f:
+            robot_tree.write(f, encoding=&#34;unicode&#34;)
+            temp_path = f.name
+
+        # Load the combined model
+        return mujoco.MjModel.from_xml_path(temp_path)</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="kos_sim.simulator.MujocoSimulator.timestep"><code class="name">prop <span class="ident">timestep</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def timestep(self) -&gt; float:
+    return self._model.opt.timestep</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="kos_sim.simulator.MujocoSimulator.close"><code class="name flex">
+<span>async def <span class="ident">close</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def close(self) -&gt; None:
+    &#34;&#34;&#34;Clean up simulation resources.&#34;&#34;&#34;
+    if self._viewer is not None:
+        try:
+            self._viewer.close()
+        except Exception as e:
+            logger.error(&#34;Error closing viewer: %s&#34;, e)
+        self._viewer = None</code></pre>
+</details>
+<div class="desc"><p>Clean up simulation resources.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.command_actuators"><code class="name flex">
+<span>async def <span class="ident">command_actuators</span></span>(<span>self, commands: dict[int, float]) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def command_actuators(self, commands: dict[int, float]) -&gt; None:
+    &#34;&#34;&#34;Command multiple actuators at once using real joint IDs.&#34;&#34;&#34;
+    async with self._lock:
+        for joint_id, command in commands.items():
+            # Translate real joint ID to MuJoCo joint name
+            if joint_id not in self._joint_id_to_name:
+                logger.warning(&#34;Joint ID %d not found in config mappings&#34;, joint_id)
+                continue
+
+            joint_name = self._joint_id_to_name[joint_id]
+            actuator_name = f&#34;{joint_name}_ctrl&#34;
+            if actuator_name not in self._actuator_name_to_id:
+                logger.warning(&#34;Joint %s not found in MuJoCo model&#34;, actuator_name)
+                continue
+
+            # Calculate random delay and application time
+            delay = np.random.uniform(self._command_delay_min, self._command_delay_max)
+            application_time = self._sim_time + delay
+
+            logger.debug(&#34;Setting actuator %s to %f with delay %f s&#34;, actuator_name, command, delay)
+            self._current_commands[actuator_name] = (command, application_time)</code></pre>
+</details>
+<div class="desc"><p>Command multiple actuators at once using real joint IDs.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.configure_actuator"><code class="name flex">
+<span>async def <span class="ident">configure_actuator</span></span>(<span>self,<br>joint_id: int,<br>configuration: <a title="kos_sim.simulator.ConfigureActuatorRequest" href="#kos_sim.simulator.ConfigureActuatorRequest">ConfigureActuatorRequest</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def configure_actuator(self, joint_id: int, configuration: ConfigureActuatorRequest) -&gt; None:
+    &#34;&#34;&#34;Configure an actuator.&#34;&#34;&#34;
+    async with self._lock:
+        if joint_id not in self._joint_id_to_actuator_id:
+            raise ValueError(
+                f&#34;Joint ID {joint_id} not found in config mappings. &#34;
+                f&#34;The available joint IDs are {self._joint_id_to_actuator_id.keys()}&#34;
+            )
+        actuator_id = self._joint_id_to_actuator_id[joint_id]
+
+        if &#34;torque_enabled&#34; in configuration:
+            if configuration[&#34;torque_enabled&#34;]:
+                self._model.actuator_gaintype[actuator_id] = 0  # position control
+                self._model.actuator_biastype[actuator_id] = 1  # enable kd
+            else:
+                self._model.actuator_gaintype[actuator_id] = -1  # disable control
+                self._model.actuator_biastype[actuator_id] = -1  # disable damping
+            logger.debug(&#34;Set torque_enabled for actuator %s to %s&#34;, joint_id, configuration[&#34;torque_enabled&#34;])
+
+        if &#34;kp&#34; in configuration:
+            prev_kp = float(self._model.actuator_gainprm[actuator_id, 0])
+            self._model.actuator_gainprm[actuator_id, 0] = configuration[&#34;kp&#34;]
+            logger.debug(&#34;Set kp for actuator %s from %f to %f&#34;, joint_id, prev_kp, configuration[&#34;kp&#34;])
+
+        if &#34;kd&#34; in configuration:
+            prev_kd = -float(self._model.actuator_biasprm[actuator_id, 2])
+            self._model.actuator_biasprm[actuator_id, 2] = -configuration[&#34;kd&#34;]
+            logger.debug(&#34;Set kd for actuator %s from %f to %f&#34;, joint_id, prev_kd, configuration[&#34;kd&#34;])
+
+        if &#34;max_torque&#34; in configuration:
+            prev_min_torque = float(self._model.actuator_forcerange[actuator_id, 0])
+            prev_max_torque = float(self._model.actuator_forcerange[actuator_id, 1])
+            self._model.actuator_forcerange[actuator_id, 0] = -configuration[&#34;max_torque&#34;]
+            self._model.actuator_forcerange[actuator_id, 1] = configuration[&#34;max_torque&#34;]
+            logger.debug(
+                &#34;Set max_torque for actuator %s from (%f, %f) to +/- %f&#34;,
+                joint_id,
+                prev_min_torque,
+                prev_max_torque,
+                configuration[&#34;max_torque&#34;],
+            )</code></pre>
+</details>
+<div class="desc"><p>Configure an actuator.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.get_actuator_state"><code class="name flex">
+<span>async def <span class="ident">get_actuator_state</span></span>(<span>self, joint_id: int) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_actuator_state(self, joint_id: int) -&gt; float:
+    &#34;&#34;&#34;Get current state of an actuator using real joint ID.&#34;&#34;&#34;
+    logger.debug(&#34;Getting actuator state for joint ID: %s&#34;, joint_id)
+    async with self._lock:
+        if joint_id not in self._joint_id_to_name:
+            raise KeyError(f&#34;Joint ID {joint_id} not found in config mappings&#34;)
+
+        joint_name = self._joint_id_to_name[joint_id]
+
+    return float(self._data.joint(joint_name).qpos)</code></pre>
+</details>
+<div class="desc"><p>Get current state of an actuator using real joint ID.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.get_actuator_velocity"><code class="name flex">
+<span>async def <span class="ident">get_actuator_velocity</span></span>(<span>self, joint_id: int) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_actuator_velocity(self, joint_id: int) -&gt; float:
+    &#34;&#34;&#34;Get current velocity of an actuator using real joint ID.&#34;&#34;&#34;
+    logger.debug(&#34;Getting actuator velocity for joint ID: %s&#34;, joint_id)
+    async with self._lock:
+        if joint_id not in self._joint_id_to_name:
+            raise KeyError(f&#34;Joint ID {joint_id} not found in config mappings&#34;)
+
+        joint_name = self._joint_id_to_name[joint_id]
+
+    return float(self._data.joint(joint_name).qvel)</code></pre>
+</details>
+<div class="desc"><p>Get current velocity of an actuator using real joint ID.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.get_sensor_data"><code class="name flex">
+<span>async def <span class="ident">get_sensor_data</span></span>(<span>self, name: str) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_sensor_data(self, name: str) -&gt; np.ndarray:
+    &#34;&#34;&#34;Get data from a named sensor.&#34;&#34;&#34;
+    async with self._lock:
+        if name not in self._sensor_name_to_id:
+            raise KeyError(f&#34;Sensor &#39;{name}&#39; not found&#34;)
+        sensor_id = self._sensor_name_to_id[name]
+        return self._data.sensor(sensor_id).data.copy()</code></pre>
+</details>
+<div class="desc"><p>Get data from a named sensor.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.load_mjmodel"><code class="name flex">
+<span>def <span class="ident">load_mjmodel</span></span>(<span>self, model_path: str, scene_type: str) ‑> mujoco._structs.MjModel</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_mjmodel(self, model_path: str, scene_type: str) -&gt; mujoco.MjModel:
+    &#34;&#34;&#34;Load a MuJoCo model with a scene template.&#34;&#34;&#34;
+    # Get scene XML
+    scene_xml = get_scene_model(scene_type)
+
+    # Parse the robot model
+    robot_tree = ET.parse(model_path)
+    robot_root = robot_tree.getroot()
+
+    # Parse the scene template
+    scene_root = ET.fromstring(scene_xml)
+
+    # Copy scene elements into robot model
+    for section in scene_root:
+        if section.tag in [&#34;asset&#34;, &#34;worldbody&#34;]:
+            target = robot_root.find(section.tag)
+            if target is None:
+                robot_root.append(section)
+            else:
+                for element in section:
+                    target.append(element)
+
+    # Write combined XML to temporary file in the same directory as the model
+    model_dir = Path(model_path).parent
+    with tempfile.NamedTemporaryFile(suffix=&#34;.xml&#34;, mode=&#34;w&#34;, dir=str(model_dir), delete=False) as f:
+        robot_tree.write(f, encoding=&#34;unicode&#34;)
+        temp_path = f.name
+
+    # Load the combined model
+    return mujoco.MjModel.from_xml_path(temp_path)</code></pre>
+</details>
+<div class="desc"><p>Load a MuJoCo model with a scene template.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.render"><code class="name flex">
+<span>async def <span class="ident">render</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def render(self) -&gt; None:
+    &#34;&#34;&#34;Render the simulation asynchronously.&#34;&#34;&#34;
+    if not self._render_enabled or self._viewer is None:
+        return
+
+    try:
+        if not self._viewer.is_alive:
+            logger.error(&#34;Viewer is not alive&#34;)
+            self._render_enabled = False
+            self._viewer = None
+            return
+        self._viewer.render()
+    except Exception as e:
+        logger.error(&#34;Render failed: %s&#34;, e)
+        self._render_enabled = False
+        if self._viewer is not None:
+            try:
+                self._viewer.close()
+                import glfw
+
+                glfw.terminate()
+            except:
+                pass
+            self._viewer = None</code></pre>
+</details>
+<div class="desc"><p>Render the simulation asynchronously.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.reset"><code class="name flex">
+<span>async def <span class="ident">reset</span></span>(<span>self, qpos: list[float] | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def reset(self, qpos: list[float] | None = None) -&gt; None:
+    &#34;&#34;&#34;Reset simulation to specified or default state.&#34;&#34;&#34;
+    self._sim_time = 0.0
+    self._current_commands.clear()
+
+    mujoco.mj_resetData(self._model, self._data)
+
+    # If no qpos provided, set a default height
+    if qpos is None:
+        # Find the free joint that controls base position
+        for i in range(self._model.njnt):
+            if self._model.jnt_type[i] == mujoco.mjtJoint.mjJNT_FREE:
+                # Set initial height to 0.5 meters above ground
+                self._data.qpos[i + 2] = 0.5  # z-coordinate
+                break
+    else:
+        self._data.qpos[: len(qpos)] = qpos
+
+    self._data.qvel[:] = np.zeros_like(self._data.qvel)
+    self._data.qacc[:] = np.zeros_like(self._data.qacc)
+    mujoco.mj_forward(self._model, self._data)</code></pre>
+</details>
+<div class="desc"><p>Reset simulation to specified or default state.</p></div>
+</dd>
+<dt id="kos_sim.simulator.MujocoSimulator.step"><code class="name flex">
+<span>async def <span class="ident">step</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def step(self) -&gt; None:
+    &#34;&#34;&#34;Execute one step of the simulation.&#34;&#34;&#34;
+    async with self._lock:
+        self._sim_time += self._dt
+
+        # Process commands that are ready to be applied
+        commands_to_remove = []
+        for name, (target_pos, application_time) in self._current_commands.items():
+            if self._sim_time &gt;= application_time:
+                actuator_id = self._actuator_name_to_id[name]
+                logger.debug(&#34;Setting actuator %s (id %d) to %f&#34;, name, actuator_id, target_pos)
+                self._data.ctrl[actuator_id] = target_pos
+                commands_to_remove.append(name)
+
+        # Remove processed commands
+        if commands_to_remove:
+            logger.debug(&#34;Removing %d commands at sim time %f&#34;, len(commands_to_remove), self._sim_time)
+            for name in commands_to_remove:
+                self._current_commands.pop(name)
+
+    # Step physics - allow other coroutines to run during computation
+    mujoco.mj_step(self._model, self._data)
+    if self._suspended:
+        # Find the root joint (floating_base)
+        for i in range(self._model.njnt):
+            if self._model.jnt_type[i] == mujoco.mjtJoint.mjJNT_FREE:
+                self._data.qpos[i : i + 7] = self._model.keyframe(&#34;default&#34;).qpos[i : i + 7]
+                self._data.qvel[i : i + 6] = 0
+                break
+
+    return self._data</code></pre>
+</details>
+<div class="desc"><p>Execute one step of the simulation.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="kos_sim" href="index.html">kos_sim</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="kos_sim.simulator.ConfigureActuatorRequest" href="#kos_sim.simulator.ConfigureActuatorRequest">ConfigureActuatorRequest</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.simulator.ConfigureActuatorRequest.kd" href="#kos_sim.simulator.ConfigureActuatorRequest.kd">kd</a></code></li>
+<li><code><a title="kos_sim.simulator.ConfigureActuatorRequest.kp" href="#kos_sim.simulator.ConfigureActuatorRequest.kp">kp</a></code></li>
+<li><code><a title="kos_sim.simulator.ConfigureActuatorRequest.max_torque" href="#kos_sim.simulator.ConfigureActuatorRequest.max_torque">max_torque</a></code></li>
+<li><code><a title="kos_sim.simulator.ConfigureActuatorRequest.torque_enabled" href="#kos_sim.simulator.ConfigureActuatorRequest.torque_enabled">torque_enabled</a></code></li>
+<li><code><a title="kos_sim.simulator.ConfigureActuatorRequest.zero_position" href="#kos_sim.simulator.ConfigureActuatorRequest.zero_position">zero_position</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kos_sim.simulator.MujocoSimulator" href="#kos_sim.simulator.MujocoSimulator">MujocoSimulator</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.simulator.MujocoSimulator.close" href="#kos_sim.simulator.MujocoSimulator.close">close</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.command_actuators" href="#kos_sim.simulator.MujocoSimulator.command_actuators">command_actuators</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.configure_actuator" href="#kos_sim.simulator.MujocoSimulator.configure_actuator">configure_actuator</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.get_actuator_state" href="#kos_sim.simulator.MujocoSimulator.get_actuator_state">get_actuator_state</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.get_actuator_velocity" href="#kos_sim.simulator.MujocoSimulator.get_actuator_velocity">get_actuator_velocity</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.get_sensor_data" href="#kos_sim.simulator.MujocoSimulator.get_sensor_data">get_sensor_data</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.load_mjmodel" href="#kos_sim.simulator.MujocoSimulator.load_mjmodel">load_mjmodel</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.render" href="#kos_sim.simulator.MujocoSimulator.render">render</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.reset" href="#kos_sim.simulator.MujocoSimulator.reset">reset</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.step" href="#kos_sim.simulator.MujocoSimulator.step">step</a></code></li>
+<li><code><a title="kos_sim.simulator.MujocoSimulator.timestep" href="#kos_sim.simulator.MujocoSimulator.timestep">timestep</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

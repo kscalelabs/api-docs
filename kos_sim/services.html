@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>kos_sim.services API documentation</title>
+<meta name="description" content="Service implementations for MuJoCo simulation.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>kos_sim.services</code></h1>
+</header>
+<section id="section-intro">
+<p>Service implementations for MuJoCo simulation.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="kos_sim.services.ActuatorService"><code class="flex name class">
+<span>class <span class="ident">ActuatorService</span></span>
+<span>(</span><span>simulator: <a title="kos_sim.simulator.MujocoSimulator" href="simulator.html#kos_sim.simulator.MujocoSimulator">MujocoSimulator</a>,<br>step_controller: <a title="kos_sim.stepping.StepController" href="stepping.html#kos_sim.stepping.StepController">StepController</a>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActuatorService(actuator_pb2_grpc.ActuatorServiceServicer):
+    &#34;&#34;&#34;Implementation of ActuatorService that wraps a MuJoCo simulation.&#34;&#34;&#34;
+
+    def __init__(self, simulator: MujocoSimulator, step_controller: StepController) -&gt; None:
+        self.simulator = simulator
+        self.step_controller = step_controller
+
+    async def CommandActuators(  # noqa: N802
+        self,
+        request: actuator_pb2.CommandActuatorsRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; actuator_pb2.CommandActuatorsResponse:
+        &#34;&#34;&#34;Implements CommandActuators by forwarding to simulator.&#34;&#34;&#34;
+        try:
+            # Convert degrees to radians.
+            commands = {cmd.actuator_id: math.radians(cmd.position) for cmd in request.commands}
+            await self.simulator.command_actuators(commands)
+            return actuator_pb2.CommandActuatorsResponse()
+        except Exception as e:
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return actuator_pb2.CommandActuatorsResponse()
+
+    async def GetActuatorsState(  # noqa: N802
+        self,
+        request: actuator_pb2.GetActuatorsStateRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; actuator_pb2.GetActuatorsStateResponse:
+        &#34;&#34;&#34;Implements GetActuatorsState by reading from simulator.&#34;&#34;&#34;
+        logger.info(&#34;GetActuatorsState request received&#34;)
+        ids = request.actuator_ids or list(self.simulator._joint_id_to_name.keys())
+        try:
+            states = {
+                joint_id: (
+                    await self.simulator.get_actuator_state(joint_id),
+                    await self.simulator.get_actuator_velocity(joint_id),
+                )
+                for joint_id in ids
+            }
+            return actuator_pb2.GetActuatorsStateResponse(
+                states=[
+                    actuator_pb2.ActuatorStateResponse(
+                        actuator_id=joint_id,
+                        position=math.degrees(float(state)),
+                        velocity=math.degrees(float(velocity)),
+                        online=True,
+                    )
+                    for joint_id, (state, velocity) in states.items()
+                ]
+            )
+        except Exception as e:
+            logger.error(&#34;GetActuatorsState failed: %s&#34;, e)
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return actuator_pb2.GetActuatorsStateResponse()
+
+    async def ConfigureActuator(  # noqa: N802
+        self,
+        request: actuator_pb2.ConfigureActuatorRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; common_pb2.ActionResponse:
+        configuration: ConfigureActuatorRequest = {}
+        if request.HasField(&#34;torque_enabled&#34;):
+            configuration[&#34;torque_enabled&#34;] = request.torque_enabled
+        if request.HasField(&#34;zero_position&#34;):
+            configuration[&#34;zero_position&#34;] = request.zero_position
+        if request.HasField(&#34;kp&#34;):
+            configuration[&#34;kp&#34;] = request.kp
+        if request.HasField(&#34;kd&#34;):
+            configuration[&#34;kd&#34;] = request.kd
+        if request.HasField(&#34;max_torque&#34;):
+            configuration[&#34;max_torque&#34;] = request.max_torque
+        await self.simulator.configure_actuator(request.actuator_id, configuration)
+
+        return common_pb2.ActionResponse(success=True)</code></pre>
+</details>
+<div class="desc"><p>Implementation of ActuatorService that wraps a MuJoCo simulation.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kos_protos.actuator_pb2_grpc.ActuatorServiceServicer</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="kos_sim.services.ActuatorService.CommandActuators"><code class="name flex">
+<span>async def <span class="ident">CommandActuators</span></span>(<span>self,<br>request: kos.actuator_pb2.CommandActuatorsRequest,<br>context: grpc.ServicerContext) ‑> kos.actuator_pb2.CommandActuatorsResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def CommandActuators(  # noqa: N802
+    self,
+    request: actuator_pb2.CommandActuatorsRequest,
+    context: grpc.ServicerContext,
+) -&gt; actuator_pb2.CommandActuatorsResponse:
+    &#34;&#34;&#34;Implements CommandActuators by forwarding to simulator.&#34;&#34;&#34;
+    try:
+        # Convert degrees to radians.
+        commands = {cmd.actuator_id: math.radians(cmd.position) for cmd in request.commands}
+        await self.simulator.command_actuators(commands)
+        return actuator_pb2.CommandActuatorsResponse()
+    except Exception as e:
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return actuator_pb2.CommandActuatorsResponse()</code></pre>
+</details>
+<div class="desc"><p>Implements CommandActuators by forwarding to simulator.</p></div>
+</dd>
+<dt id="kos_sim.services.ActuatorService.ConfigureActuator"><code class="name flex">
+<span>async def <span class="ident">ConfigureActuator</span></span>(<span>self,<br>request: kos.actuator_pb2.ConfigureActuatorRequest,<br>context: grpc.ServicerContext) ‑> kos.common_pb2.ActionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def ConfigureActuator(  # noqa: N802
+    self,
+    request: actuator_pb2.ConfigureActuatorRequest,
+    context: grpc.ServicerContext,
+) -&gt; common_pb2.ActionResponse:
+    configuration: ConfigureActuatorRequest = {}
+    if request.HasField(&#34;torque_enabled&#34;):
+        configuration[&#34;torque_enabled&#34;] = request.torque_enabled
+    if request.HasField(&#34;zero_position&#34;):
+        configuration[&#34;zero_position&#34;] = request.zero_position
+    if request.HasField(&#34;kp&#34;):
+        configuration[&#34;kp&#34;] = request.kp
+    if request.HasField(&#34;kd&#34;):
+        configuration[&#34;kd&#34;] = request.kd
+    if request.HasField(&#34;max_torque&#34;):
+        configuration[&#34;max_torque&#34;] = request.max_torque
+    await self.simulator.configure_actuator(request.actuator_id, configuration)
+
+    return common_pb2.ActionResponse(success=True)</code></pre>
+</details>
+<div class="desc"><p>Configures an actuator's parameters.</p></div>
+</dd>
+<dt id="kos_sim.services.ActuatorService.GetActuatorsState"><code class="name flex">
+<span>async def <span class="ident">GetActuatorsState</span></span>(<span>self,<br>request: kos.actuator_pb2.GetActuatorsStateRequest,<br>context: grpc.ServicerContext) ‑> kos.actuator_pb2.GetActuatorsStateResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def GetActuatorsState(  # noqa: N802
+    self,
+    request: actuator_pb2.GetActuatorsStateRequest,
+    context: grpc.ServicerContext,
+) -&gt; actuator_pb2.GetActuatorsStateResponse:
+    &#34;&#34;&#34;Implements GetActuatorsState by reading from simulator.&#34;&#34;&#34;
+    logger.info(&#34;GetActuatorsState request received&#34;)
+    ids = request.actuator_ids or list(self.simulator._joint_id_to_name.keys())
+    try:
+        states = {
+            joint_id: (
+                await self.simulator.get_actuator_state(joint_id),
+                await self.simulator.get_actuator_velocity(joint_id),
+            )
+            for joint_id in ids
+        }
+        return actuator_pb2.GetActuatorsStateResponse(
+            states=[
+                actuator_pb2.ActuatorStateResponse(
+                    actuator_id=joint_id,
+                    position=math.degrees(float(state)),
+                    velocity=math.degrees(float(velocity)),
+                    online=True,
+                )
+                for joint_id, (state, velocity) in states.items()
+            ]
+        )
+    except Exception as e:
+        logger.error(&#34;GetActuatorsState failed: %s&#34;, e)
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return actuator_pb2.GetActuatorsStateResponse()</code></pre>
+</details>
+<div class="desc"><p>Implements GetActuatorsState by reading from simulator.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="kos_sim.services.IMUService"><code class="flex name class">
+<span>class <span class="ident">IMUService</span></span>
+<span>(</span><span>simulator: <a title="kos_sim.simulator.MujocoSimulator" href="simulator.html#kos_sim.simulator.MujocoSimulator">MujocoSimulator</a>,<br>step_controller: <a title="kos_sim.stepping.StepController" href="stepping.html#kos_sim.stepping.StepController">StepController</a>,<br>acc_name: str | None = 'imu_acc',<br>gyro_name: str | None = 'imu_gyro',<br>mag_name: str | None = 'imu_mag',<br>quat_name: str | None = 'base_link_quat')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class IMUService(imu_pb2_grpc.IMUServiceServicer):
+    &#34;&#34;&#34;Implementation of IMUService that wraps a MuJoCo simulation.&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        simulator: MujocoSimulator,
+        step_controller: StepController,
+        acc_name: str | None = &#34;imu_acc&#34;,
+        gyro_name: str | None = &#34;imu_gyro&#34;,
+        mag_name: str | None = &#34;imu_mag&#34;,
+        quat_name: str | None = &#34;base_link_quat&#34;,
+    ) -&gt; None:
+        self.simulator = simulator
+        self.step_controller = step_controller
+        self.acc_name = acc_name
+        self.gyro_name = gyro_name
+        self.mag_name = mag_name
+        self.quat_name = quat_name
+
+    async def GetValues(  # noqa: N802
+        self,
+        request: empty_pb2.Empty,
+        context: grpc.ServicerContext,
+    ) -&gt; imu_pb2.IMUValuesResponse:
+        &#34;&#34;&#34;Implements GetValues by reading IMU sensor data from simulator.&#34;&#34;&#34;
+        try:
+            if self.acc_name is None or self.gyro_name is None:
+                raise ValueError(&#34;Accelerometer or gyroscope name not set&#34;)
+            acc_data = await self.simulator.get_sensor_data(self.acc_name)
+            gyro_data = await self.simulator.get_sensor_data(self.gyro_name)
+            mag_data = None if self.mag_name is None else await self.simulator.get_sensor_data(self.mag_name)
+            return imu_pb2.IMUValuesResponse(
+                accel_x=float(acc_data[0]),
+                accel_y=float(acc_data[1]),
+                accel_z=float(acc_data[2]),
+                gyro_x=float(gyro_data[0]),
+                gyro_y=float(gyro_data[1]),
+                gyro_z=float(gyro_data[2]),
+                mag_x=None if mag_data is None else float(mag_data[0]),
+                mag_y=None if mag_data is None else float(mag_data[1]),
+                mag_z=None if mag_data is None else float(mag_data[2]),
+            )
+        except Exception as e:
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return imu_pb2.IMUValuesResponse()
+
+    async def GetQuaternion(  # noqa: N802
+        self,
+        request: empty_pb2.Empty,
+        context: grpc.ServicerContext,
+    ) -&gt; imu_pb2.QuaternionResponse:
+        &#34;&#34;&#34;Implements GetQuaternion by reading orientation data from simulator.&#34;&#34;&#34;
+        try:
+            if self.quat_name is None:
+                raise ValueError(&#34;Quaternion name not set&#34;)
+            quat_data = await self.simulator.get_sensor_data(self.quat_name)
+            return imu_pb2.QuaternionResponse(
+                w=float(quat_data[0]), x=float(quat_data[1]), y=float(quat_data[2]), z=float(quat_data[3])
+            )
+        except Exception as e:
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return imu_pb2.QuaternionResponse()
+
+    async def GetEuler(  # noqa: N802
+        self,
+        request: empty_pb2.Empty,
+        context: grpc.ServicerContext,
+    ) -&gt; imu_pb2.EulerAnglesResponse:
+        &#34;&#34;&#34;Implements GetEuler by converting orientation quaternion to Euler angles.&#34;&#34;&#34;
+        logger.info(&#34;GetEuler request received&#34;)
+        try:
+            if self.quat_name is None:
+                raise ValueError(&#34;Quaternion name not set&#34;)
+            quat_data = await self.simulator.get_sensor_data(self.quat_name)
+            # Extract quaternion components
+            w, x, y, z = [float(q) for q in quat_data]
+
+            # Convert quaternion to Euler angles (roll, pitch, yaw)
+            # Roll (x-axis rotation)
+            sinr_cosp = 2 * (w * x + y * z)
+            cosr_cosp = 1 - 2 * (x * x + y * y)
+            roll = math.atan2(sinr_cosp, cosr_cosp)
+
+            # Pitch (y-axis rotation)
+            sinp = 2 * (w * y - z * x)
+            pitch = math.asin(sinp) if abs(sinp) &lt; 1 else math.copysign(math.pi / 2, sinp)
+
+            # Yaw (z-axis rotation)
+            siny_cosp = 2 * (w * z + x * y)
+            cosy_cosp = 1 - 2 * (y * y + z * z)
+            yaw = math.atan2(siny_cosp, cosy_cosp)
+
+            # Convert to degrees
+            roll_deg = math.degrees(roll)
+            pitch_deg = math.degrees(pitch)
+            yaw_deg = math.degrees(yaw)
+
+            return imu_pb2.EulerAnglesResponse(roll=roll_deg, pitch=pitch_deg, yaw=yaw_deg)
+        except Exception as e:
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return imu_pb2.EulerAnglesResponse()
+
+    async def ZeroIMU(self, request: imu_pb2.ZeroIMURequest, context: grpc.ServicerContext) -&gt; empty_pb2.Empty:
+        &#34;&#34;&#34;Zero the IMU (no-op in simulation since IMU is already perfect).&#34;&#34;&#34;
+        return empty_pb2.Empty()</code></pre>
+</details>
+<div class="desc"><p>Implementation of IMUService that wraps a MuJoCo simulation.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kos_protos.imu_pb2_grpc.IMUServiceServicer</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="kos_sim.services.IMUService.GetEuler"><code class="name flex">
+<span>async def <span class="ident">GetEuler</span></span>(<span>self, request: google.protobuf.empty_pb2.Empty, context: grpc.ServicerContext) ‑> kos.imu_pb2.EulerAnglesResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def GetEuler(  # noqa: N802
+    self,
+    request: empty_pb2.Empty,
+    context: grpc.ServicerContext,
+) -&gt; imu_pb2.EulerAnglesResponse:
+    &#34;&#34;&#34;Implements GetEuler by converting orientation quaternion to Euler angles.&#34;&#34;&#34;
+    logger.info(&#34;GetEuler request received&#34;)
+    try:
+        if self.quat_name is None:
+            raise ValueError(&#34;Quaternion name not set&#34;)
+        quat_data = await self.simulator.get_sensor_data(self.quat_name)
+        # Extract quaternion components
+        w, x, y, z = [float(q) for q in quat_data]
+
+        # Convert quaternion to Euler angles (roll, pitch, yaw)
+        # Roll (x-axis rotation)
+        sinr_cosp = 2 * (w * x + y * z)
+        cosr_cosp = 1 - 2 * (x * x + y * y)
+        roll = math.atan2(sinr_cosp, cosr_cosp)
+
+        # Pitch (y-axis rotation)
+        sinp = 2 * (w * y - z * x)
+        pitch = math.asin(sinp) if abs(sinp) &lt; 1 else math.copysign(math.pi / 2, sinp)
+
+        # Yaw (z-axis rotation)
+        siny_cosp = 2 * (w * z + x * y)
+        cosy_cosp = 1 - 2 * (y * y + z * z)
+        yaw = math.atan2(siny_cosp, cosy_cosp)
+
+        # Convert to degrees
+        roll_deg = math.degrees(roll)
+        pitch_deg = math.degrees(pitch)
+        yaw_deg = math.degrees(yaw)
+
+        return imu_pb2.EulerAnglesResponse(roll=roll_deg, pitch=pitch_deg, yaw=yaw_deg)
+    except Exception as e:
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return imu_pb2.EulerAnglesResponse()</code></pre>
+</details>
+<div class="desc"><p>Implements GetEuler by converting orientation quaternion to Euler angles.</p></div>
+</dd>
+<dt id="kos_sim.services.IMUService.GetQuaternion"><code class="name flex">
+<span>async def <span class="ident">GetQuaternion</span></span>(<span>self, request: google.protobuf.empty_pb2.Empty, context: grpc.ServicerContext) ‑> kos.imu_pb2.QuaternionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def GetQuaternion(  # noqa: N802
+    self,
+    request: empty_pb2.Empty,
+    context: grpc.ServicerContext,
+) -&gt; imu_pb2.QuaternionResponse:
+    &#34;&#34;&#34;Implements GetQuaternion by reading orientation data from simulator.&#34;&#34;&#34;
+    try:
+        if self.quat_name is None:
+            raise ValueError(&#34;Quaternion name not set&#34;)
+        quat_data = await self.simulator.get_sensor_data(self.quat_name)
+        return imu_pb2.QuaternionResponse(
+            w=float(quat_data[0]), x=float(quat_data[1]), y=float(quat_data[2]), z=float(quat_data[3])
+        )
+    except Exception as e:
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return imu_pb2.QuaternionResponse()</code></pre>
+</details>
+<div class="desc"><p>Implements GetQuaternion by reading orientation data from simulator.</p></div>
+</dd>
+<dt id="kos_sim.services.IMUService.GetValues"><code class="name flex">
+<span>async def <span class="ident">GetValues</span></span>(<span>self, request: google.protobuf.empty_pb2.Empty, context: grpc.ServicerContext) ‑> kos.imu_pb2.IMUValuesResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def GetValues(  # noqa: N802
+    self,
+    request: empty_pb2.Empty,
+    context: grpc.ServicerContext,
+) -&gt; imu_pb2.IMUValuesResponse:
+    &#34;&#34;&#34;Implements GetValues by reading IMU sensor data from simulator.&#34;&#34;&#34;
+    try:
+        if self.acc_name is None or self.gyro_name is None:
+            raise ValueError(&#34;Accelerometer or gyroscope name not set&#34;)
+        acc_data = await self.simulator.get_sensor_data(self.acc_name)
+        gyro_data = await self.simulator.get_sensor_data(self.gyro_name)
+        mag_data = None if self.mag_name is None else await self.simulator.get_sensor_data(self.mag_name)
+        return imu_pb2.IMUValuesResponse(
+            accel_x=float(acc_data[0]),
+            accel_y=float(acc_data[1]),
+            accel_z=float(acc_data[2]),
+            gyro_x=float(gyro_data[0]),
+            gyro_y=float(gyro_data[1]),
+            gyro_z=float(gyro_data[2]),
+            mag_x=None if mag_data is None else float(mag_data[0]),
+            mag_y=None if mag_data is None else float(mag_data[1]),
+            mag_z=None if mag_data is None else float(mag_data[2]),
+        )
+    except Exception as e:
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return imu_pb2.IMUValuesResponse()</code></pre>
+</details>
+<div class="desc"><p>Implements GetValues by reading IMU sensor data from simulator.</p></div>
+</dd>
+<dt id="kos_sim.services.IMUService.ZeroIMU"><code class="name flex">
+<span>async def <span class="ident">ZeroIMU</span></span>(<span>self, request: kos.imu_pb2.ZeroIMURequest, context: grpc.ServicerContext) ‑> google.protobuf.empty_pb2.Empty</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def ZeroIMU(self, request: imu_pb2.ZeroIMURequest, context: grpc.ServicerContext) -&gt; empty_pb2.Empty:
+    &#34;&#34;&#34;Zero the IMU (no-op in simulation since IMU is already perfect).&#34;&#34;&#34;
+    return empty_pb2.Empty()</code></pre>
+</details>
+<div class="desc"><p>Zero the IMU (no-op in simulation since IMU is already perfect).</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="kos_sim.services.SimService"><code class="flex name class">
+<span>class <span class="ident">SimService</span></span>
+<span>(</span><span>simulator: <a title="kos_sim.simulator.MujocoSimulator" href="simulator.html#kos_sim.simulator.MujocoSimulator">MujocoSimulator</a>,<br>step_controller: <a title="kos_sim.stepping.StepController" href="stepping.html#kos_sim.stepping.StepController">StepController</a>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SimService(sim_pb2_grpc.SimulationServiceServicer):
+    &#34;&#34;&#34;Implementation of SimService that wraps a MuJoCo simulation.&#34;&#34;&#34;
+
+    def __init__(self, simulator: MujocoSimulator, step_controller: StepController) -&gt; None:
+        self.simulator = simulator
+        self.step_controller = step_controller
+
+    async def Reset(  # noqa: N802
+        self,
+        request: sim_pb2.ResetRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; common_pb2.ActionResponse:
+        &#34;&#34;&#34;Reset the simulation to initial or specified state.&#34;&#34;&#34;
+        logger.info(&#34;Reset request received&#34;)
+        await self.step_controller.set_paused(True)
+        try:
+            if request.HasField(&#34;initial_state&#34;):
+                qpos = list(request.initial_state.qpos)
+                logger.debug(&#34;Resetting with qpos: %s&#34;, qpos)
+                await self.simulator.reset(qpos=qpos)
+            else:
+                logger.debug(&#34;Resetting to default state&#34;)
+                await self.simulator.reset()
+            await self.step_controller.set_paused(False)
+            return common_pb2.ActionResponse(success=True)
+        except Exception as e:
+            logger.error(&#34;Reset failed: %s&#34;, e)
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return common_pb2.ActionResponse(success=False, error=str(e))
+
+    async def SetPaused(  # noqa: N802
+        self,
+        request: sim_pb2.SetPausedRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; common_pb2.ActionResponse:  # noqa: N802
+        &#34;&#34;&#34;Pause or unpause the simulation.&#34;&#34;&#34;
+        logger.info(&#34;SetPaused request received: paused=%s&#34;, request.paused)
+        try:
+            await self.step_controller.set_paused(request.paused)
+            return common_pb2.ActionResponse(success=True)
+        except Exception as e:
+            logger.error(&#34;SetPaused failed: %s&#34;, e)
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return common_pb2.ActionResponse(success=False, error=str(e))
+
+    async def Step(  # noqa: N802
+        self,
+        request: sim_pb2.StepRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; common_pb2.ActionResponse:
+        raise NotImplementedError(&#34;Step is not implemented&#34;)
+
+    async def SetParameters(  # noqa: N802
+        self,
+        request: sim_pb2.SetParametersRequest,
+        context: grpc.ServicerContext,
+    ) -&gt; common_pb2.ActionResponse:
+        &#34;&#34;&#34;Set simulation parameters.&#34;&#34;&#34;
+        logger.info(&#34;SetParameters request received: %s&#34;, request)
+        try:
+            await self.step_controller.set_paused(True)
+            params = request.parameters
+            if params.HasField(&#34;time_scale&#34;):
+                logger.debug(&#34;Setting time scale to %f&#34;, params.time_scale)
+                self.simulator._model.opt.timestep = self.simulator._dt / params.time_scale
+            if params.HasField(&#34;gravity&#34;):
+                logger.debug(&#34;Setting gravity to %f&#34;, params.gravity)
+                self.simulator._model.opt.gravity[2] = params.gravity
+            if params.HasField(&#34;initial_state&#34;):
+                logger.debug(&#34;Setting initial state: %s&#34;, params.initial_state)
+                qpos = list(params.initial_state.qpos)
+                await self.simulator.reset(qpos)
+            await self.step_controller.set_paused(False)
+            return common_pb2.ActionResponse(success=True)
+        except Exception as e:
+            logger.error(&#34;SetParameters failed: %s&#34;, e)
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return common_pb2.ActionResponse(success=False, error=str(e))
+
+    async def GetParameters(  # noqa: N802
+        self,
+        request: empty_pb2.Empty,
+        context: grpc.ServicerContext,
+    ) -&gt; sim_pb2.GetParametersResponse:
+        &#34;&#34;&#34;Get current simulation parameters.&#34;&#34;&#34;
+        logger.info(&#34;GetParameters request received&#34;)
+        try:
+            params = sim_pb2.SimulationParameters(
+                time_scale=self.simulator._dt / self.simulator._model.opt.timestep,
+                gravity=float(self.simulator._model.opt.gravity[2]),
+            )
+            logger.debug(&#34;Current parameters: time_scale=%f, gravity=%f&#34;, params.time_scale, params.gravity)
+            return sim_pb2.GetParametersResponse(parameters=params)
+        except Exception as e:
+            logger.error(&#34;GetParameters failed: %s&#34;, e)
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(str(e))
+            return sim_pb2.GetParametersResponse(error=common_pb2.Error(message=str(e)))</code></pre>
+</details>
+<div class="desc"><p>Implementation of SimService that wraps a MuJoCo simulation.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>kos_protos.sim_pb2_grpc.SimulationServiceServicer</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="kos_sim.services.SimService.GetParameters"><code class="name flex">
+<span>async def <span class="ident">GetParameters</span></span>(<span>self, request: google.protobuf.empty_pb2.Empty, context: grpc.ServicerContext) ‑> kos.sim_pb2.GetParametersResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def GetParameters(  # noqa: N802
+    self,
+    request: empty_pb2.Empty,
+    context: grpc.ServicerContext,
+) -&gt; sim_pb2.GetParametersResponse:
+    &#34;&#34;&#34;Get current simulation parameters.&#34;&#34;&#34;
+    logger.info(&#34;GetParameters request received&#34;)
+    try:
+        params = sim_pb2.SimulationParameters(
+            time_scale=self.simulator._dt / self.simulator._model.opt.timestep,
+            gravity=float(self.simulator._model.opt.gravity[2]),
+        )
+        logger.debug(&#34;Current parameters: time_scale=%f, gravity=%f&#34;, params.time_scale, params.gravity)
+        return sim_pb2.GetParametersResponse(parameters=params)
+    except Exception as e:
+        logger.error(&#34;GetParameters failed: %s&#34;, e)
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return sim_pb2.GetParametersResponse(error=common_pb2.Error(message=str(e)))</code></pre>
+</details>
+<div class="desc"><p>Get current simulation parameters.</p></div>
+</dd>
+<dt id="kos_sim.services.SimService.Reset"><code class="name flex">
+<span>async def <span class="ident">Reset</span></span>(<span>self, request: kos.sim_pb2.ResetRequest, context: grpc.ServicerContext) ‑> kos.common_pb2.ActionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def Reset(  # noqa: N802
+    self,
+    request: sim_pb2.ResetRequest,
+    context: grpc.ServicerContext,
+) -&gt; common_pb2.ActionResponse:
+    &#34;&#34;&#34;Reset the simulation to initial or specified state.&#34;&#34;&#34;
+    logger.info(&#34;Reset request received&#34;)
+    await self.step_controller.set_paused(True)
+    try:
+        if request.HasField(&#34;initial_state&#34;):
+            qpos = list(request.initial_state.qpos)
+            logger.debug(&#34;Resetting with qpos: %s&#34;, qpos)
+            await self.simulator.reset(qpos=qpos)
+        else:
+            logger.debug(&#34;Resetting to default state&#34;)
+            await self.simulator.reset()
+        await self.step_controller.set_paused(False)
+        return common_pb2.ActionResponse(success=True)
+    except Exception as e:
+        logger.error(&#34;Reset failed: %s&#34;, e)
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return common_pb2.ActionResponse(success=False, error=str(e))</code></pre>
+</details>
+<div class="desc"><p>Reset the simulation to initial or specified state.</p></div>
+</dd>
+<dt id="kos_sim.services.SimService.SetParameters"><code class="name flex">
+<span>async def <span class="ident">SetParameters</span></span>(<span>self, request: kos.sim_pb2.SetParametersRequest, context: grpc.ServicerContext) ‑> kos.common_pb2.ActionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def SetParameters(  # noqa: N802
+    self,
+    request: sim_pb2.SetParametersRequest,
+    context: grpc.ServicerContext,
+) -&gt; common_pb2.ActionResponse:
+    &#34;&#34;&#34;Set simulation parameters.&#34;&#34;&#34;
+    logger.info(&#34;SetParameters request received: %s&#34;, request)
+    try:
+        await self.step_controller.set_paused(True)
+        params = request.parameters
+        if params.HasField(&#34;time_scale&#34;):
+            logger.debug(&#34;Setting time scale to %f&#34;, params.time_scale)
+            self.simulator._model.opt.timestep = self.simulator._dt / params.time_scale
+        if params.HasField(&#34;gravity&#34;):
+            logger.debug(&#34;Setting gravity to %f&#34;, params.gravity)
+            self.simulator._model.opt.gravity[2] = params.gravity
+        if params.HasField(&#34;initial_state&#34;):
+            logger.debug(&#34;Setting initial state: %s&#34;, params.initial_state)
+            qpos = list(params.initial_state.qpos)
+            await self.simulator.reset(qpos)
+        await self.step_controller.set_paused(False)
+        return common_pb2.ActionResponse(success=True)
+    except Exception as e:
+        logger.error(&#34;SetParameters failed: %s&#34;, e)
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return common_pb2.ActionResponse(success=False, error=str(e))</code></pre>
+</details>
+<div class="desc"><p>Set simulation parameters.</p></div>
+</dd>
+<dt id="kos_sim.services.SimService.SetPaused"><code class="name flex">
+<span>async def <span class="ident">SetPaused</span></span>(<span>self, request: kos.sim_pb2.SetPausedRequest, context: grpc.ServicerContext) ‑> kos.common_pb2.ActionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def SetPaused(  # noqa: N802
+    self,
+    request: sim_pb2.SetPausedRequest,
+    context: grpc.ServicerContext,
+) -&gt; common_pb2.ActionResponse:  # noqa: N802
+    &#34;&#34;&#34;Pause or unpause the simulation.&#34;&#34;&#34;
+    logger.info(&#34;SetPaused request received: paused=%s&#34;, request.paused)
+    try:
+        await self.step_controller.set_paused(request.paused)
+        return common_pb2.ActionResponse(success=True)
+    except Exception as e:
+        logger.error(&#34;SetPaused failed: %s&#34;, e)
+        context.set_code(grpc.StatusCode.INTERNAL)
+        context.set_details(str(e))
+        return common_pb2.ActionResponse(success=False, error=str(e))</code></pre>
+</details>
+<div class="desc"><p>Pause or unpause the simulation.</p></div>
+</dd>
+<dt id="kos_sim.services.SimService.Step"><code class="name flex">
+<span>async def <span class="ident">Step</span></span>(<span>self, request: kos.sim_pb2.StepRequest, context: grpc.ServicerContext) ‑> kos.common_pb2.ActionResponse</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def Step(  # noqa: N802
+    self,
+    request: sim_pb2.StepRequest,
+    context: grpc.ServicerContext,
+) -&gt; common_pb2.ActionResponse:
+    raise NotImplementedError(&#34;Step is not implemented&#34;)</code></pre>
+</details>
+<div class="desc"><p>Steps the simulation forward by a specified amount.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="kos_sim" href="index.html">kos_sim</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="kos_sim.services.ActuatorService" href="#kos_sim.services.ActuatorService">ActuatorService</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.services.ActuatorService.CommandActuators" href="#kos_sim.services.ActuatorService.CommandActuators">CommandActuators</a></code></li>
+<li><code><a title="kos_sim.services.ActuatorService.ConfigureActuator" href="#kos_sim.services.ActuatorService.ConfigureActuator">ConfigureActuator</a></code></li>
+<li><code><a title="kos_sim.services.ActuatorService.GetActuatorsState" href="#kos_sim.services.ActuatorService.GetActuatorsState">GetActuatorsState</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kos_sim.services.IMUService" href="#kos_sim.services.IMUService">IMUService</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.services.IMUService.GetEuler" href="#kos_sim.services.IMUService.GetEuler">GetEuler</a></code></li>
+<li><code><a title="kos_sim.services.IMUService.GetQuaternion" href="#kos_sim.services.IMUService.GetQuaternion">GetQuaternion</a></code></li>
+<li><code><a title="kos_sim.services.IMUService.GetValues" href="#kos_sim.services.IMUService.GetValues">GetValues</a></code></li>
+<li><code><a title="kos_sim.services.IMUService.ZeroIMU" href="#kos_sim.services.IMUService.ZeroIMU">ZeroIMU</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="kos_sim.services.SimService" href="#kos_sim.services.SimService">SimService</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.services.SimService.GetParameters" href="#kos_sim.services.SimService.GetParameters">GetParameters</a></code></li>
+<li><code><a title="kos_sim.services.SimService.Reset" href="#kos_sim.services.SimService.Reset">Reset</a></code></li>
+<li><code><a title="kos_sim.services.SimService.SetParameters" href="#kos_sim.services.SimService.SetParameters">SetParameters</a></code></li>
+<li><code><a title="kos_sim.services.SimService.SetPaused" href="#kos_sim.services.SimService.SetPaused">SetPaused</a></code></li>
+<li><code><a title="kos_sim.services.SimService.Step" href="#kos_sim.services.SimService.Step">Step</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

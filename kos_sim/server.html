@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>kos_sim.server API documentation</title>
+<meta name="description" content="Server and simulation loop for KOS.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>kos_sim.server</code></h1>
+</header>
+<section id="section-intro">
+<p>Server and simulation loop for KOS.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="kos_sim.server.get_model_metadata"><code class="name flex">
+<span>async def <span class="ident">get_model_metadata</span></span>(<span>api: kscale.web.clients.client.WWWClient, model_name: str) ‑> kscale.web.gen.api.RobotURDFMetadataOutput</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def get_model_metadata(api: K, model_name: str) -&gt; RobotURDFMetadataOutput:
+    model_path = get_sim_artifacts_path() / model_name / &#34;metadata.json&#34;
+    if model_path.exists():
+        return RobotURDFMetadataOutput.model_validate_json(model_path.read_text())
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+    robot_class = await api.get_robot_class(model_name)
+    metadata = robot_class.metadata
+    if metadata is None:
+        raise ValueError(f&#34;No metadata found for model {model_name}&#34;)
+    model_path.write_text(metadata.model_dump_json())
+    return metadata</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.server.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main() -&gt; None:
+    &#34;&#34;&#34;Entry point for the server.&#34;&#34;&#34;
+    asyncio.run(run_server())</code></pre>
+</details>
+<div class="desc"><p>Entry point for the server.</p></div>
+</dd>
+<dt id="kos_sim.server.run_server"><code class="name flex">
+<span>async def <span class="ident">run_server</span></span>(<span>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def run_server() -&gt; None:
+    parser = argparse.ArgumentParser(description=&#34;Start the simulation gRPC server.&#34;)
+    parser.add_argument(&#34;model_name&#34;, type=str, help=&#34;Name of the model to simulate&#34;)
+    parser.add_argument(&#34;--host&#34;, type=str, default=&#34;localhost&#34;, help=&#34;Host to listen on&#34;)
+    parser.add_argument(&#34;--port&#34;, type=int, default=50051, help=&#34;Port to listen on&#34;)
+    parser.add_argument(&#34;--dt&#34;, type=float, default=0.001, help=&#34;Simulation timestep&#34;)
+    parser.add_argument(
+        &#34;--scene&#34;,
+        type=str,
+        default=&#34;smooth&#34;,
+        choices=[&#34;smooth&#34;, &#34;rough&#34;, &#34;narrow&#34;, &#34;wide&#34;],
+        help=&#34;Type of scene to load&#34;,
+    )
+    parser.add_argument(&#34;--no-gravity&#34;, action=&#34;store_true&#34;, help=&#34;Disable gravity&#34;)
+    parser.add_argument(&#34;--no-render&#34;, action=&#34;store_true&#34;, help=&#34;Disable rendering&#34;)
+    parser.add_argument(&#34;--suspended&#34;, action=&#34;store_true&#34;, help=&#34;Start simulation suspended&#34;)
+    parser.add_argument(&#34;--command-delay-min&#34;, type=float, default=0.0, help=&#34;Minimum command delay&#34;)
+    parser.add_argument(&#34;--command-delay-max&#34;, type=float, default=0.0, help=&#34;Maximum command delay&#34;)
+    parser.add_argument(&#34;--torque-enabled&#34;, action=&#34;store_true&#34;, help=&#34;Enable torque for all actuators at startup&#34;)
+    parser.add_argument(&#34;--debug&#34;, action=&#34;store_true&#34;, help=&#34;Enable debug logging&#34;)
+    args = parser.parse_args()
+
+    colorlogging.configure(level=logging.DEBUG if args.debug else logging.INFO)
+
+    await serve(
+        model_name=args.model_name,
+        host=args.host,
+        port=args.port,
+        dt=args.dt,
+        gravity=not args.no_gravity,
+        render=not args.no_render,
+        suspended=args.suspended,
+        command_delay_min=args.command_delay_min,
+        command_delay_max=args.command_delay_max,
+        scene_type=args.scene,
+    )</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="kos_sim.server.serve"><code class="name flex">
+<span>async def <span class="ident">serve</span></span>(<span>model_name: str,<br>host: str = 'localhost',<br>port: int = 50051,<br>dt: float = 0.001,<br>gravity: bool = True,<br>render: bool = True,<br>suspended: bool = False,<br>torque_enabled: bool = True,<br>command_delay_min: float = 0.0,<br>command_delay_max: float = 0.0,<br>scene_type: str = 'smooth') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def serve(
+    model_name: str,
+    host: str = &#34;localhost&#34;,
+    port: int = 50051,
+    dt: float = 0.001,
+    gravity: bool = True,
+    render: bool = True,
+    suspended: bool = False,
+    torque_enabled: bool = True,
+    command_delay_min: float = 0.0,
+    command_delay_max: float = 0.0,
+    scene_type: str = &#34;smooth&#34;,
+) -&gt; None:
+    async with K() as api:
+        model_dir, model_metadata = await asyncio.gather(
+            api.download_and_extract_urdf(model_name),
+            get_model_metadata(api, model_name),
+        )
+
+    mjcf_path = next(model_dir.glob(&#34;*.mjcf&#34;), None)
+    urdf_path = next(model_dir.glob(&#34;*.urdf&#34;), None)
+
+    if mjcf_path is None and urdf_path is None:
+        raise ValueError(f&#34;No MJCF or URDF file found in {model_dir}&#34;)
+
+    model_path = mjcf_path if mjcf_path is not None else urdf_path
+    logger.info(&#34;Using model %s with scene template: %s&#34;, model_path, scene_type)
+
+    server = SimulationServer(
+        model_path=model_path,
+        model_metadata=model_metadata,
+        host=host,
+        port=port,
+        dt=dt,
+        gravity=gravity,
+        render=render,
+        suspended=suspended,
+        torque_enabled=torque_enabled,
+        command_delay_min=command_delay_min,
+        command_delay_max=command_delay_max,
+        scene_type=scene_type,
+    )
+    await server.start()</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="kos_sim.server.SimulationServer"><code class="flex name class">
+<span>class <span class="ident">SimulationServer</span></span>
+<span>(</span><span>model_path: str | pathlib.Path,<br>model_metadata: kscale.web.gen.api.RobotURDFMetadataOutput,<br>host: str = 'localhost',<br>port: int = 50051,<br>step_mode: <a title="kos_sim.stepping.StepMode" href="stepping.html#kos_sim.stepping.StepMode">StepMode</a> = StepMode.CONTINUOUS,<br>dt: float = 0.001,<br>gravity: bool = True,<br>render: bool = True,<br>suspended: bool = False,<br>command_delay_min: float = 0.0,<br>command_delay_max: float = 0.0,<br>sleep_time: float = 0.0001,<br>scene_type: str = 'smooth',<br>torque_enabled: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SimulationServer:
+    def __init__(
+        self,
+        model_path: str | Path,
+        model_metadata: RobotURDFMetadataOutput,
+        host: str = &#34;localhost&#34;,
+        port: int = 50051,
+        step_mode: StepMode = StepMode.CONTINUOUS,
+        dt: float = 0.001,
+        gravity: bool = True,
+        render: bool = True,
+        suspended: bool = False,
+        command_delay_min: float = 0.0,
+        command_delay_max: float = 0.0,
+        sleep_time: float = 0.0001,
+        scene_type: str = &#34;smooth&#34;,
+        torque_enabled: bool = True,
+    ) -&gt; None:
+        self.simulator = MujocoSimulator(
+            model_path=model_path,
+            model_metadata=model_metadata,
+            dt=dt,
+            gravity=gravity,
+            render=render,
+            suspended=suspended,
+            command_delay_min=command_delay_min,
+            command_delay_max=command_delay_max,
+            scene_type=scene_type,
+        )
+        self.step_controller = StepController(self.simulator, mode=step_mode)
+        self.host = host
+        self.port = port
+        self._sleep_time = sleep_time
+        self._stop_event = asyncio.Event()
+        self._server = None
+
+    async def _grpc_server_loop(self) -&gt; None:
+        &#34;&#34;&#34;Run the async gRPC server.&#34;&#34;&#34;
+        # Create async gRPC server
+        self._server = grpc.aio.server(futures.ThreadPoolExecutor(max_workers=10))
+
+        assert self._server is not None
+
+        # Add our services (these need to be modified to be async as well)
+        actuator_service = ActuatorService(self.simulator, self.step_controller)
+        imu_service = IMUService(self.simulator, self.step_controller)
+        sim_service = SimService(self.simulator, self.step_controller)
+
+        actuator_pb2_grpc.add_ActuatorServiceServicer_to_server(actuator_service, self._server)
+        imu_pb2_grpc.add_IMUServiceServicer_to_server(imu_service, self._server)
+        sim_pb2_grpc.add_SimulationServiceServicer_to_server(sim_service, self._server)
+
+        # Start the server
+        self._server.add_insecure_port(f&#34;{self.host}:{self.port}&#34;)
+        await self._server.start()
+        logger.info(&#34;Server started on %s:%d&#34;, self.host, self.port)
+        await self._server.wait_for_termination()
+
+    async def simulation_loop(self) -&gt; None:
+        &#34;&#34;&#34;Run the simulation loop asynchronously.&#34;&#34;&#34;
+        last_update = time.time()
+
+        try:
+            while not self._stop_event.is_set():
+                current_time = time.time()
+                sim_time = current_time - last_update
+
+                if await self.step_controller.should_step():
+                    steps = 0
+                    while sim_time &gt; 0:
+                        await self.simulator.step()
+                        sim_time -= self.simulator.timestep
+                        steps += 1
+                    logger.debug(
+                        &#34;Ran %d simulation steps (sim_time: %.3f, timestep: %.3f)&#34;,
+                        steps,
+                        current_time - last_update,
+                        self.simulator.timestep,
+                    )
+                    last_update = current_time
+
+                await self.simulator.render()
+
+                # Add a small sleep to prevent the loop from consuming too much CPU.
+                await asyncio.sleep(self._sleep_time)
+
+        except Exception as e:
+            logger.error(&#34;Simulation loop failed: %s&#34;, e)
+            logger.error(&#34;Traceback: %s&#34;, traceback.format_exc())
+
+        finally:
+            await self.stop()
+
+    async def start(self) -&gt; None:
+        &#34;&#34;&#34;Start both the gRPC server and simulation loop asynchronously.&#34;&#34;&#34;
+        grpc_task = asyncio.create_task(self._grpc_server_loop())
+        sim_task = asyncio.create_task(self.simulation_loop())
+
+        try:
+            await asyncio.gather(grpc_task, sim_task)
+        except asyncio.CancelledError:
+            await self.stop()
+
+    async def stop(self) -&gt; None:
+        &#34;&#34;&#34;Stop the simulation and cleanup resources asynchronously.&#34;&#34;&#34;
+        logger.info(&#34;Shutting down simulation...&#34;)
+        self._stop_event.set()
+        if self._server is not None:
+            await self._server.stop(0)
+        await self.simulator.close()</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Methods</h3>
+<dl>
+<dt id="kos_sim.server.SimulationServer.simulation_loop"><code class="name flex">
+<span>async def <span class="ident">simulation_loop</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def simulation_loop(self) -&gt; None:
+    &#34;&#34;&#34;Run the simulation loop asynchronously.&#34;&#34;&#34;
+    last_update = time.time()
+
+    try:
+        while not self._stop_event.is_set():
+            current_time = time.time()
+            sim_time = current_time - last_update
+
+            if await self.step_controller.should_step():
+                steps = 0
+                while sim_time &gt; 0:
+                    await self.simulator.step()
+                    sim_time -= self.simulator.timestep
+                    steps += 1
+                logger.debug(
+                    &#34;Ran %d simulation steps (sim_time: %.3f, timestep: %.3f)&#34;,
+                    steps,
+                    current_time - last_update,
+                    self.simulator.timestep,
+                )
+                last_update = current_time
+
+            await self.simulator.render()
+
+            # Add a small sleep to prevent the loop from consuming too much CPU.
+            await asyncio.sleep(self._sleep_time)
+
+    except Exception as e:
+        logger.error(&#34;Simulation loop failed: %s&#34;, e)
+        logger.error(&#34;Traceback: %s&#34;, traceback.format_exc())
+
+    finally:
+        await self.stop()</code></pre>
+</details>
+<div class="desc"><p>Run the simulation loop asynchronously.</p></div>
+</dd>
+<dt id="kos_sim.server.SimulationServer.start"><code class="name flex">
+<span>async def <span class="ident">start</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def start(self) -&gt; None:
+    &#34;&#34;&#34;Start both the gRPC server and simulation loop asynchronously.&#34;&#34;&#34;
+    grpc_task = asyncio.create_task(self._grpc_server_loop())
+    sim_task = asyncio.create_task(self.simulation_loop())
+
+    try:
+        await asyncio.gather(grpc_task, sim_task)
+    except asyncio.CancelledError:
+        await self.stop()</code></pre>
+</details>
+<div class="desc"><p>Start both the gRPC server and simulation loop asynchronously.</p></div>
+</dd>
+<dt id="kos_sim.server.SimulationServer.stop"><code class="name flex">
+<span>async def <span class="ident">stop</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def stop(self) -&gt; None:
+    &#34;&#34;&#34;Stop the simulation and cleanup resources asynchronously.&#34;&#34;&#34;
+    logger.info(&#34;Shutting down simulation...&#34;)
+    self._stop_event.set()
+    if self._server is not None:
+        await self._server.stop(0)
+    await self.simulator.close()</code></pre>
+</details>
+<div class="desc"><p>Stop the simulation and cleanup resources asynchronously.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="kos_sim" href="index.html">kos_sim</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="kos_sim.server.get_model_metadata" href="#kos_sim.server.get_model_metadata">get_model_metadata</a></code></li>
+<li><code><a title="kos_sim.server.main" href="#kos_sim.server.main">main</a></code></li>
+<li><code><a title="kos_sim.server.run_server" href="#kos_sim.server.run_server">run_server</a></code></li>
+<li><code><a title="kos_sim.server.serve" href="#kos_sim.server.serve">serve</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="kos_sim.server.SimulationServer" href="#kos_sim.server.SimulationServer">SimulationServer</a></code></h4>
+<ul class="">
+<li><code><a title="kos_sim.server.SimulationServer.simulation_loop" href="#kos_sim.server.SimulationServer.simulation_loop">simulation_loop</a></code></li>
+<li><code><a title="kos_sim.server.SimulationServer.start" href="#kos_sim.server.SimulationServer.start">start</a></code></li>
+<li><code><a title="kos_sim.server.SimulationServer.stop" href="#kos_sim.server.SimulationServer.stop">stop</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>
