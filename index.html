@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOS API Documentation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        a {
-            display: block;
-            padding: 10px;
-            background-color: #f5f5f5;
-            text-decoration: none;
-            color: #333;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #e0e0e0;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>KOS API Documentation</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .description {
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>KOS API Documentation</h1>
-    <ul>
-        <li><a href="KOS-API/index.html">API Overview</a></li>
-        <li><a href="KOS-API/actuator.html">Actuator</a></li>
-        <li><a href="KOS-API/imu.html">IMU</a></li>
-        <li><a href="KOS-API/inference.html">Inference</a></li>
-        <li><a href="KOS-API/led_matrix.html">LED Matrix</a></li>
-        <li><a href="KOS-API/process_manager.html">Process Manager</a></li>
-        <li><a href="KOS-API/sim.html">Simulation</a></li>
-        <li><a href="KOS-API/sound.html">Sound</a></li>
-    </ul>
+  <h1>KOS API Documentation</h1>
+  
+  <div class="description">
+    <p>Documentation for KOS (Kobuki Operating System) service clients.</p>
+  </div>
+  
+  <h2>Services</h2>
+  <ul>
+    <li><a href="actuator.html">Actuator</a> - Actuator service client</li>
+    <li><a href="imu.html">IMU</a> - IMU service client</li>
+    <li><a href="inference.html">Inference</a> - Inference service client</li>
+    <li><a href="led_matrix.html">LED Matrix</a> - LED Matrix service client</li>
+    <li><a href="process_manager.html">Process Manager</a> - Process manager service client</li>
+    <li><a href="sim.html">Sim</a> - Sim service client</li>
+    <li><a href="sound.html">Sound</a> - Sound service client</li>
+  </ul>
 </body>
 </html>
